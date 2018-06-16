@@ -189,6 +189,9 @@ lazy val json = crossProject(JVMPlatform, JSPlatform)
     libraryDependencies ++= Circe.value
   )
   .jsSettings(commonJSSettings)
+  .jsSettings(
+    test := {}
+  )
 
 lazy val jsonJVM = json.jvm.enablePlugins(AutomateHeaderPlugin)
 lazy val jsonJS = json.js
@@ -419,6 +422,8 @@ lazy val seqexec_web_client = project.in(file("modules/seqexec/web/client"))
     webpackEmitSourceMaps                    := false,
     webpackExtraArgs                         := Seq("--progress", "true"),
     emitSourceMaps                           := false,
+    parallelExecution in Test                := false,
+    test                                     := {},
     // Requires the DOM for tests
     requiresDOM in Test                      := true,
     // Use yarn as it is faster than npm
